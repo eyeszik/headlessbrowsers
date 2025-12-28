@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Environment variables
+.env
+.env.production
+.env.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+redis_data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+.audit_log.jsonl
+
+# Media
+media/
+uploads/
+/tmp/
+
+# Docker
+docker-compose.override.yml
+
+# Monitoring
+prometheus_data/
+grafana_data/
+loki_data/
+
+# Backups
+*.sql
+*.dump
+backup/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Secrets
+secrets/
+*.pem
+*.key
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Alembic
+backend/migrations/versions/*.pyc
