@@ -1,0 +1,111 @@
+{
+  "campaign_brief": "Announcing our new AI-powered content automation platform that helps\n    businesses create and publish engaging content across multiple social\n    media platforms with advanced guardrails and multi-agent orchestration.",
+  "execution_timestamp": "2025-12-29T10:45:19.116725",
+  "checkpoint_id": "campaign_20251229_104519",
+  "state_verification": "PASSED",
+  "variants": [
+    {
+      "platform": "twitter",
+      "content_preview": "\ud83d\ude80 Announcing our new AI-powered content automation platform that helps\n    businesses create and pub...",
+      "hashtags": [
+        "Innovation",
+        "Tech"
+      ],
+      "confidence": 0.85,
+      "assumptions_count": 1,
+      "guardrails_triggered": []
+    },
+    {
+      "platform": "facebook",
+      "content_preview": "Hey everyone! \ud83d\udc4b Announcing our new AI-powered content automation platform that helps\n    businesses ...",
+      "hashtags": [
+        "Community",
+        "Engagement",
+        "Updates"
+      ],
+      "confidence": 0.8,
+      "assumptions_count": 1,
+      "guardrails_triggered": []
+    },
+    {
+      "platform": "instagram",
+      "content_preview": "\u2728 Announcing our new AI-powered content automation platform that helps\n    businesses create and pub...",
+      "hashtags": [
+        "Inspiration",
+        "Innovation",
+        "Community",
+        "Tech",
+        "Growth"
+      ],
+      "confidence": 0.88,
+      "assumptions_count": 1,
+      "guardrails_triggered": []
+    },
+    {
+      "platform": "linkedin",
+      "content_preview": "Announcing our new AI-powered content automation platform that helps\n    businesses create and publi...",
+      "hashtags": [
+        "Leadership",
+        "Innovation",
+        "Business"
+      ],
+      "confidence": 0.92,
+      "assumptions_count": 1,
+      "guardrails_triggered": []
+    },
+    {
+      "platform": "youtube",
+      "content_preview": "Announcing our new AI-powered content automation platform that helps\n    businesses create and publi...",
+      "hashtags": [
+        "Tutorial",
+        "HowTo",
+        "Learning",
+        "Tech",
+        "Education"
+      ],
+      "confidence": 0.86,
+      "assumptions_count": 1,
+      "guardrails_triggered": []
+    }
+  ],
+  "adversarial_reviews": [
+    {
+      "platform": "twitter",
+      "disagreement_score": 0.2,
+      "requires_human_review": false,
+      "risks_count": 1
+    },
+    {
+      "platform": "facebook",
+      "disagreement_score": 0.30000000000000004,
+      "requires_human_review": true,
+      "risks_count": 2
+    },
+    {
+      "platform": "instagram",
+      "disagreement_score": 0.2,
+      "requires_human_review": false,
+      "risks_count": 1
+    },
+    {
+      "platform": "linkedin",
+      "disagreement_score": 0.2,
+      "requires_human_review": false,
+      "risks_count": 1
+    },
+    {
+      "platform": "youtube",
+      "disagreement_score": 0.2,
+      "requires_human_review": false,
+      "risks_count": 1
+    }
+  ],
+  "aggregate_metrics": {
+    "total_variants": 5,
+    "total_assumptions": 5,
+    "avg_confidence": 0.8619999999999999,
+    "avg_disagreement": 0.21999999999999997,
+    "human_reviews_required": 1,
+    "guardrails_triggered_total": 0
+  }
+}
