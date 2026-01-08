@@ -12,8 +12,20 @@ Headless Browsers
 <br/>
 
 <div align="center">
-  Experience unstoppable data extraction with <a href="https://brightdata.com/products/scraping-browser">Bright Data’s Scraping Browser</a>. Bypass blocks, handle JavaScript effortlessly, and power up your automation at scale. Start your free trial now!
+  Experience unstoppable data extraction with <a href="https://brightdata.com/products/scraping-browser">Bright Data's Scraping Browser</a>. Bypass blocks, handle JavaScript effortlessly, and power up your automation at scale. Start your free trial now!
 </div>
+
+## Table of Contents
+
+- [Browser Engines](#browser-engines) - Full rendering engines
+- [Multi Drivers](#multi-drivers) - Libraries controlling multiple browser engines
+- [PhantomJS Drivers](#phantomjs-drivers) - Tools specifically for PhantomJS
+- [Chromium Drivers](#chromium-drivers) - Chrome/Chromium automation
+- [Webkit Drivers](#webkit-drivers) - WebKit-based tools
+- [Other Drivers](#other-drivers) - Alternative browser engines
+- [Fake Browser Engine](#fake-browser-engine) - HTML-only/naive browsers
+- [Runs in a Browser](#runs-in-a-browser) - Testing tools that run within browsers
+- [Misc Tools](#misc-tools) - Supporting tools
 
 ## Browser engines
 
@@ -34,14 +46,14 @@ Name  | About  | Supported Languages | License
 
 Name  | About  | Supported Languages | License
 :------------ |:---------------| :----- | :-----------
-|[CasperJS](http://casperjs.org/) | [[Unmaintained]](https://github.com/casperjs/casperjs) CasperJS is an open source navigation scripting & testing utility written in Javascript for the PhantomJS WebKit headless browser and SlimerJS (Gecko).        |   JavaScript | MIT |
-|[Geb](http://www.gebish.org/) | Geb is a Groovy interface to WebDriver.|Groovy| Apache |
+|[CasperJS](https://github.com/casperjs/casperjs) | [[Unmaintained]](https://github.com/casperjs/casperjs) CasperJS is an open source navigation scripting & testing utility written in Javascript for the PhantomJS WebKit headless browser and SlimerJS (Gecko).        |   JavaScript | MIT |
+|[Geb](https://www.gebish.org/) | Geb is a Groovy interface to WebDriver.|Groovy| Apache |
 |[Playwright](https://github.com/microsoft/playwright) | Playwright is a Node library to automate the Chromium, WebKit and Firefox browsers with a single API |TypeScript| Apache |
 |[playwright-dotnet](https://github.com/microsoft/playwright-dotnet) | Playwright for .NET is a library to automate Chromium, Firefox and WebKit browsers with a single API. |.NET| MIT |
 |[playwright-python](https://github.com/microsoft/playwright-python) | Playwright for Python is a library to automate Chromium, Firefox and WebKit browsers with a single API. |Python| Apache |
 |[playwright-java](https://github.com/microsoft/playwright-java) | Playwright for Java is a library to automate Chromium, Firefox and WebKit browsers with a single API. |Java| Apache |
 |[playwright-go](https://github.com/mxschmitt/playwright-go) | Playwright for Go is a library to automate Chromium, Firefox and WebKit browsers with a single API. |Go| MIT |
-|[Selenium](http://seleniumhq.org) | Selenium is a suite of tools to automate web browsers across many platforms.|JavaScript, Python, Ruby, Java, C#, Haskell, Objective-C, Perl, PHP, R, C++| Apache |
+|[Selenium](https://www.selenium.dev/) | Selenium is a suite of tools to automate web browsers across many platforms.|JavaScript, Python, Ruby, Java, C#, Haskell, Objective-C, Perl, PHP, R, C++| Apache |
 |[Splinter](https://splinter.readthedocs.io/en/latest/) | Splinter is an open source tool for testing web applications using Python. It lets you automate browser actions, such as visiting URLs and interacting with their items.|Python| - |
 |[SST](https://pypi.python.org/pypi/sst/0.2.4) | SST (selenium-simple-test) is a web test framework that uses Python to generate functional browser-based tests.|Python| - |
 |[Watir](https://github.com/watir/watir) | The most elegant way to use Selenium WebDriver with Ruby.|Ruby| MIT |
@@ -57,7 +69,7 @@ Name  | About  | Supported Languages | License
 |[Lotte](https://github.com/StanAngeloff/lotte)| Lotte is a headless, automated testing framework built on top of PhantomJS and inspired by Ghostbuster. | JavaScript | MIT |
 |[phantompy](https://github.com/niwinz/phantompy) | Phantompy is a headless WebKit engine with powerful pythonic api build on top of Qt5 Webkit|Python| LGPL-2.1 |
 |[X-RAY](https://github.com/lapwinglabs/x-ray) | Supports strings, arrays, arrays of objects, nested object structures, selector API, pagination, crawler, concurrency, throttles, delays, timeouts, and pluggable drivers (PhantomJS, HTTP)|JavaScript| MIT |
-|[Horseman](http://www.horsemanjs.org/) | Promise based Node.js module for PhantomJS. Features chainable API, understandable control-flow, support for multiple tabs, and built-in jQuery.|JavaScript| MIT |
+|[Horseman](https://github.com/johntitus/node-horseman) | [[Unmaintained]] Promise based Node.js module for PhantomJS. Features chainable API, understandable control-flow, support for multiple tabs, and built-in jQuery.|JavaScript| MIT |
 
 ## Chromium drivers
 
@@ -67,11 +79,11 @@ Name  | About  | Supported Languages | License
 :------------ |:---------------| :----- | :-----------
 |[Awesomium](http://www.awesomium.com/) | Chromium-based headless browser engine|C++, .NET| Free/Commercial |
 |[Headless Chromium](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md) | Chromium feature activated with the `--headlesss` flag, currently availible in the nightly build of Chromium, not yet released|C++| Opensource |
-|[Puppeteer](https://github.com/GoogleChrome/puppeteer) | Headless Chrome Node API from the Chrome DevTools team|JavaScript| Apache |
+|[Puppeteer](https://github.com/puppeteer/puppeteer) | Headless Chrome Node API from the Chrome DevTools team|JavaScript| Apache |
 |[PuppeteerSharp](https://github.com/kblok/puppeteer-sharp) | PuppeteerSharp is a .NET port of the official Headless Chrome Node.JS Puppeteer API|.NET| MIT |
 |[chrome-remote-interface](https://github.com/cyrus-and/chrome-remote-interface) | Chrome Debugging Protocol interface for Node.js|JavaScript| MIT |
 |[Chromy](https://github.com/OnetapInc/chromy/) | Features chainable API, mobile emulation, fundamental API such as javascript evaluation. |JavaScript| MIT |
-|[chromedp](https://github.com/knq/chromedp) | A faster, simpler way to drive browsers (Chrome, Edge, Safari, Android, etc) without external dependencies (ie, Selenium, PhantomJS, etc) using the Chrome Debugging Protocol.|Go| MIT |
+|[chromedp](https://github.com/chromedp/chromedp) | A faster, simpler way to drive browsers (Chrome, Edge, Safari, Android, etc) without external dependencies (ie, Selenium, PhantomJS, etc) using the Chrome Debugging Protocol.|Go| MIT |
 |[Chromeless](https://github.com/graphcool/chromeless) | Chrome automation made simple. Runs locally or headless on AWS Lambda. | JavaScript | MIT |
 |[Chrome PHP](https://github.com/chrome-php/headless-chromium-php) | PHP API to drive Chromium or Google Chrome via the Chrome Devtools Protocole. | PHP | Fair |
 |[Wendigo](https://github.com/angrykoala/wendigo) | Test-oriented browser automation library using Puppeteer. | JavaScript | GPL-3.0 | 
@@ -103,11 +115,11 @@ Name  | About  | Supported Languages | License
 Name  | About  | Supported Languages | License
 :------------ |:---------------| :----- | :-----------
 |[Cypress](https://www.cypress.io/) | Cypress supports end-to-end, integration and unit tests and makes debugging tests simple. Default engine is headless Electron. |JavaScript| MIT |
-|[Nightmare](http://www.nightmarejs.org/) | Nightmare is a high-level browser automation library built as an easier alternative to PhantomJS. It runs on the Electron engine. |JavaScript| MIT |
+|[Nightmare](https://github.com/segment-boneyard/nightmare) | [[Unmaintained]] Nightmare is a high-level browser automation library built as an easier alternative to PhantomJS. It runs on the Electron engine. |JavaScript| MIT |
 |[grope](https://github.com/youpy/grope) | A RubyCocoa interface to the macOS WebKit Framework |RubyCocoa| MIT |
-|[SlimerJS](http://slimerjs.org/) | SlimerJS is similar to PhantomJs, except that it runs Gecko, the browser engine of Mozilla Firefox, instead of Webkit (And it is not yet truly headless).|JavaScript| Mozilla 2.0 |
+|[SlimerJS](https://slimerjs.org/) | [[Unmaintained]] SlimerJS is similar to PhantomJs, except that it runs Gecko, the browser engine of Mozilla Firefox, instead of Webkit (And it is not yet truly headless).|JavaScript| Mozilla 2.0 |
 |[SpecterJS](https://github.com/andyjansson/specterjs) | A scriptable headless Internet Explorer port of PhantomJS. | JavaScript | MIT |
-|[trifleJS](http://triflejs.org/) | A headless Internet Explorer browser using the .NET WebBrowser Class with a Javascript API running on the V8 engine.|JavaScript| MIT |
+|[trifleJS](https://github.com/sdesalas/trifleJS) | [[Unmaintained]] A headless Internet Explorer browser using the .NET WebBrowser Class with a Javascript API running on the V8 engine.|JavaScript| MIT |
 
 
 ## Fake Browser Engine
@@ -124,21 +136,21 @@ Name  | About  | Supported Languages | License
 |[DamonJS](https://github.com/damonjs/damon) | Bot navigating urls and doing tasks.|JavaScript| Apache |
 |[Headless](https://github.com/roryprimrose/Headless) | Headless browser support for fast web acceptance testing in .Net|.NET| MIT |
 |[HeadlessBrowser](https://github.com/clubajax/HeadlessBrowser) | A very miniature headless browser, for testing the DOM on Node.js|JavaScript| Not specified |
-|[HtmlUnit](http://htmlunit.sourceforge.net/) | HtmlUnit is a "GUI-Less browser for Java programs".|Java| Apache |
+|[HtmlUnit](https://htmlunit.sourceforge.io/) | HtmlUnit is a "GUI-Less browser for Java programs".|Java| Apache |
 |[Jaunt](http://jaunt-api.com/) | Java Web Scraping & Automation API|Java| Apache (monthly edition)|
 |[Jauntium](https://jauntium.com/) | Free Java library that allows you to easily automate Chrome, Firefox, Safari, Edge, IE, and other modern web browers.|Java| Apache|
-|[JSDom](https://github.com/tmpvar/jsdom) | A JavaScript implementation of the WHATWG DOM and HTML standards, for use with Node.js. |JavaScript| MIT |
+|[JSDom](https://github.com/jsdom/jsdom) | A JavaScript implementation of the WHATWG DOM and HTML standards, for use with Node.js. |JavaScript| MIT |
 |[MechanicalSoup](https://github.com/hickford/MechanicalSoup) | A Python library for automating interaction with websites.|Python| MIT |
-|[mechanize](http://wwwsearch.sourceforge.net/mechanize/) | Stateful programmatic web browsing.|Python| BSD 3-Clause, ZPL 2.1 |
+|[mechanize](https://github.com/python-mechanize/mechanize) | Stateful programmatic web browsing.|Python| BSD 3-Clause, ZPL 2.1 |
 |[node-as-browser](https://github.com/seebigs/node-as-browser) | Create a browser-like environment within Node.js |JavaScript| MIT |
 |[RoboBrowser](https://github.com/jmcarp/robobrowser) | A simple, Pythonic library for browsing the web without a standalone web browser.|Python| BSD 3-Clause |
 |[SimpleBrowser](https://github.com/SimpleBrowserDotNet/SimpleBrowser) | A flexible and intuitive web browser engine designed for automation tasks. Built on the .Net 4 framework.|.NET| BSD 3-Clause |
-|[twill](http://twill.idyll.org/) | Twill is a simple language that interacts with basic HTML pages (no JavaScript support).|Python| MIT |
-|[WeasyPrint](http://weasyprint.org/) | WeasyPrint is a visual rendering engine for HTML and CSS that can export to PDF. It aims to support web standards for printing.|Python| BSD 3-Clause |
+|[twill](https://twill-tools.github.io/twill/) | Twill is a simple language that interacts with basic HTML pages (no JavaScript support).|Python| MIT |
+|[WeasyPrint](https://weasyprint.org/) | WeasyPrint is a visual rendering engine for HTML and CSS that can export to PDF. It aims to support web standards for printing.|Python| BSD 3-Clause |
 |[WWW::Mechanize](https://metacpan.org/search?size=20&q=WWW%3A%3AMechanize&search_type=modules) |  Headless browser for Perl with many plugins and extensions, notably Test::WWW:Mechanize for testing | Perl | Perl 5 |
 |[X-RAY](https://github.com/lapwinglabs/x-ray) | Supports strings, arrays, arrays of objects, nested object structures, selector API, pagination, crawler, concurrency, throttles, delays, timeouts, and pluggable drivers (PhantomJS, HTTP)|JavaScript| MIT |
 |[Xidel (Internet Tools)](http://www.videlibri.de/xidel.html) | An XQuery-based cli web scraper for static X/HTML pages and JSON-APIs. |FreePascal, XQuery| GPL-2|
-|[Zombie.js](http://zombie.js.org/) | Zombie.js is a lightweight framework for testing client-side JavaScript code in a simulated environment. No browser required.    | JavaScript   | MIT |
+|[Zombie.js](https://github.com/assaf/zombie) | [[Unmaintained]] Zombie.js is a lightweight framework for testing client-side JavaScript code in a simulated environment. No browser required.    | JavaScript   | MIT |
 
 ## Runs in a browser
 
