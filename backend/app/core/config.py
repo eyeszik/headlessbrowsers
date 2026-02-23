@@ -85,6 +85,34 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     AUDIT_LOG_FILE: str = ".audit_log.jsonl"
 
+    # ── Stock Image Pipeline ──────────────────────────────────────────────────
+
+    # Notion
+    NOTION_API_TOKEN: Optional[str] = None
+    NOTION_DATABASE_ID: Optional[str] = None
+
+    # Image generation
+    IMAGE_GEN_PROVIDER: str = "openai"
+    STABILITY_AI_API_KEY: Optional[str] = None
+    IMAGE_GEN_BATCH_SIZE: int = 10
+    IMAGE_GEN_SIZE: str = "1024x1024"
+
+    # Upscaling
+    UPSCALER_BACKEND: str = "pillow"
+    UPSCALE_TARGET_WIDTH: int = 6000
+    UPSCALE_TARGET_HEIGHT: int = 4000
+
+    # Metadata
+    METADATA_AI_PROVIDER: str = "openai"
+    METADATA_KEYWORD_COUNT: int = 40
+    METADATA_DESCRIPTION_MIN_LENGTH: int = 200
+    METADATA_DESCRIPTION_MAX_LENGTH: int = 500
+    TARGET_STOCK_PLATFORMS: str = "shutterstock,adobe_stock,getty,istock"
+
+    # Local storage
+    STOCK_IMAGES_LOCAL_PATH: str = "./data/stock_images"
+    METADATA_FILES_PATH: str = "./data/metadata"
+
     @property
     def DATABASE_URL(self) -> str:
         """Construct database URL from components."""

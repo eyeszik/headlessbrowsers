@@ -8,7 +8,8 @@ from backend.app.api.v1 import (
     social_accounts,
     templates,
     analytics,
-    media
+    media,
+    stock_images,
 )
 
 api_router = APIRouter()
@@ -47,4 +48,10 @@ api_router.include_router(
     media.router,
     prefix="/media",
     tags=["media"]
+)
+
+api_router.include_router(
+    stock_images.router,
+    prefix="/stock-images",
+    tags=["stock-images"]
 )

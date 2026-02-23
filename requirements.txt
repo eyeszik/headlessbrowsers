@@ -73,3 +73,9 @@ faker==22.6.0
 black==24.1.1
 flake8==7.0.0
 mypy==1.8.0
+
+# Stock image pipeline
+notion-client==2.2.1
+imagehash==4.3.1
+stability-sdk==0.8.6
+numpy==1.26.4
