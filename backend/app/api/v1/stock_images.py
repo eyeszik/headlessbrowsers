@@ -301,8 +301,11 @@ async def pipeline_status() -> StatusResponse:
             "database_id":   settings.NOTION_DATABASE_ID or "not set",
         },
         metadata={
-            "provider":      settings.METADATA_AI_PROVIDER,
-            "keyword_count": settings.METADATA_KEYWORD_COUNT,
+            "provider":        settings.METADATA_AI_PROVIDER,
+            "openai_ready":    bool(settings.OPENAI_API_KEY),
+            "anthropic_ready": bool(settings.ANTHROPIC_API_KEY),
+            "gemini_ready":    bool(settings.GEMINI_API_KEY),
+            "keyword_count":   settings.METADATA_KEYWORD_COUNT,
             "target_platforms": settings.TARGET_STOCK_PLATFORMS.split(","),
         },
         storage={

@@ -8,7 +8,7 @@ Generates per-image:
   - Platform-specific validation (Shutterstock, Adobe Stock, Getty, iStock)
   - Formatted metadata .txt file content
 
-Uses OpenAI GPT-4 or Anthropic Claude depending on METADATA_AI_PROVIDER.
+Uses OpenAI GPT-4, Anthropic Claude, or Google Gemini depending on METADATA_AI_PROVIDER.
 Falls back to heuristic template generation if no API key is configured.
 """
 from __future__ import annotations
@@ -120,7 +120,8 @@ class MetadataOptimizer:
     Priority:
       1. OpenAI GPT-4 (if METADATA_AI_PROVIDER=openai and key present)
       2. Anthropic Claude (if METADATA_AI_PROVIDER=anthropic and key present)
-      3. Heuristic template fallback (no API keys needed)
+      3. Google Gemini (if METADATA_AI_PROVIDER=gemini and key present)
+      4. Heuristic template fallback (no API keys needed)
     """
 
     _SYSTEM_PROMPT = """You are an expert stock photography SEO specialist.
@@ -193,6 +194,8 @@ Keyword rules:
             raw = await self._generate_openai(user_prompt)
         elif provider == "anthropic" and self._settings.ANTHROPIC_API_KEY:
             raw = await self._generate_anthropic(user_prompt)
+        elif provider == "gemini" and self._settings.GEMINI_API_KEY:
+            raw = await self._generate_gemini(user_prompt)
 
         if raw is None:
             logger.info(f"No AI provider available — using heuristic for {image_id}")
@@ -282,6 +285,32 @@ Keyword rules:
             return json.loads(text)
         except Exception as exc:
             logger.error(f"Anthropic metadata generation failed: {exc}")
+            return None
+
+    async def _generate_gemini(self, user_prompt: str) -> Optional[Dict[str, Any]]:
+        """Generate content using Google Gemini."""
+        try:
+            import google.generativeai as genai
+            genai.configure(api_key=self._settings.GEMINI_API_KEY)
+
+            model = genai.GenerativeModel(
+                model_name=self._settings.GEMINI_MODEL,
+                generation_config={
+                    "temperature": 0.7,
+                    "max_output_tokens": 800,
+                }
+            )
+
+            # Gemini uses a single prompt combining system + user
+            full_prompt = f"{self._SYSTEM_PROMPT}\n\n{user_prompt}"
+            response = model.generate_content(full_prompt)
+            text = response.text
+
+            # Strip any markdown code fences
+            text = re.sub(r"```(?:json)?", "", text).strip()
+            return json.loads(text)
+        except Exception as exc:
+            logger.error(f"Gemini metadata generation failed: {exc}")
             return None
 
     # ── Parsing & validation ──────────────────────────────────────────────────
