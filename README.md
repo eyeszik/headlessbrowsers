@@ -1,19 +1,11 @@
 Headless Browsers
 ================
 
+> ✨ Get long term memory across all your AI tools with [MemoryPlugin](https://www.memoryplugin.com/?ref=github-headlessbrowsers) [sponsor]
+
 ### A list of (almost) all headless web browsers in existence
 
 *A web browser without a graphical user interface, controlled programmatically. Used for automation, testing, and other purposes.*
-
-<div align="center">
-  Sponsored by <a href="https://www.browserbase.com">🅱️ Browserbase</a>: Hosted Headless Web Browsers with built-in session recording, auto-scaling, proxies and captcha solving.<br/> Compatible with Puppeteer, Playwright, and Selenium.
-</div>
-
-<br/>
-
-<div align="center">
-  Experience unstoppable data extraction with <a href="https://brightdata.com/products/scraping-browser">Bright Data’s Scraping Browser</a>. Bypass blocks, handle JavaScript effortlessly, and power up your automation at scale. Start your free trial now!
-</div>
 
 ## Browser engines
 
