@@ -85,3 +85,9 @@ secrets/
 
 # Alembic
 backend/migrations/versions/*.pyc
+
+# Stock Image Pipeline (generated artifacts)
+data/stock_images/
+data/metadata/
+stock_pipeline_report_*.json
+automation_report_*.json
