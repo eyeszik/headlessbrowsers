@@ -285,6 +285,48 @@ class MediaManager:
             logger.error(f"Failed to delete media asset {media_asset.id}: {e}")
             return False
 
+    def verify_upload_integrity(self, media_asset: MediaAsset) -> bool:
+        """
+        Re-download the object from S3 and confirm its SHA-256 matches the
+        hash recorded on the MediaAsset at upload time.
+
+        This catches silent corruption during upload/transfer (truncated
+        writes, proxy interference, etc.) — it is not a security signature
+        check, just an integrity check against the hash we computed locally
+        before uploading.
+
+        Returns:
+            True if the hash matches (or verification isn't applicable
+            because S3 isn't configured); False on a genuine mismatch.
+        """
+        if not media_asset.storage_path.startswith("s3://") or not self.s3_client:
+            logger.debug(
+                f"Skipping integrity check for asset {media_asset.id}: "
+                "not stored in S3"
+            )
+            return True
+
+        try:
+            path_parts = media_asset.storage_path.replace("s3://", "").split("/", 1)
+            bucket, key = path_parts[0], path_parts[1]
+
+            obj = self.s3_client.get_object(Bucket=bucket, Key=key)
+            downloaded_bytes = obj["Body"].read()
+            downloaded_hash = hashlib.sha256(downloaded_bytes).hexdigest()
+
+            if downloaded_hash != media_asset.sha256_hash:
+                logger.error(
+                    f"INTEGRITY MISMATCH for asset {media_asset.id}: "
+                    f"expected {media_asset.sha256_hash}, got {downloaded_hash}"
+                )
+                return False
+
+            return True
+
+        except ClientError as e:
+            logger.error(f"Integrity verification failed for asset {media_asset.id}: {e}")
+            return False
+
     def get_media_url(self, media_asset: MediaAsset) -> str:
         """
         Get accessible URL for media asset.

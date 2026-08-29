@@ -72,7 +72,7 @@ headlessbrowsers/
 │       │       ├── social_accounts.py     # Social account management
 │       │       ├── templates.py           # Template CRUD + render
 │       │       ├── analytics.py           # Analytics fetch + aggregate
-│       │       └── media.py               # Media upload (S3) + list
+│       │       └── media.py               # Media upload (S3) + list + generate-social-image
 │       ├── services/
 │       │   ├── orchestrator.py            # Multi-agent orchestration (570 LOC)
 │       │   ├── state_verifier.py          # Merkle-tree state checkpointing (400 LOC)
@@ -80,7 +80,8 @@ headlessbrowsers/
 │       │   ├── template_engine.py         # Jinja2 rendering with platform overrides
 │       │   ├── content_formatter.py       # Platform-specific content formatting
 │       │   ├── analytics_service.py       # Cross-platform analytics aggregation
-│       │   ├── media_manager.py           # S3 upload, resize, dedup via SHA-256
+│       │   ├── media_manager.py           # S3 upload, resize, dedup via SHA-256, integrity verify
+│       │   ├── governance.py              # Legal/ethical/security/resource checks (pure functions)
 │       │   ├── integrations/
 │       │   │   ├── base.py                # BasePlatformIntegration (retry, rate limit)
 │       │   │   ├── youtube.py             # YouTube Data API v3
@@ -89,7 +90,11 @@ headlessbrowsers/
 │       │   │   ├── instagram.py           # Instagram Graph API
 │       │   │   └── linkedin.py            # LinkedIn API v2
 │       │   └── ai/
-│       │       └── ai_service.py          # OpenAI + Anthropic, guardrails, assumptions
+│       │       ├── ai_service.py          # OpenAI + Anthropic, guardrails, assumptions
+│       │       ├── social_image_generator.py  # DALL-E 3 per-platform image generation
+│       │       ├── image_generator.py     # Stock-photo batch generation (DALL-E/Stability/mock)
+│       │       ├── image_upscaler.py      # Stock-photo upscaling to 6000x4000
+│       │       └── metadata_optimizer.py  # Stock-photo SEO metadata (OpenAI/Anthropic/Gemini)
 │       ├── adapters/
 │       │   ├── langchain_adapter.py       # LangChain tool-augmented agent adapter
 │       │   └── crewai_adapter.py          # CrewAI 5-agent hierarchical crew
@@ -170,7 +175,8 @@ Relationships: SocialAccount 1→N Content, Campaign 1→N Content, Content 1→
 | `social_accounts.py` | CRUD `/social-accounts`, POST `/social-accounts/{id}/validate` |
 | `templates.py` | CRUD `/templates`, POST `/templates/{id}/render` |
 | `analytics.py` | GET `/analytics/content/{id}`, GET `/analytics/campaign/{id}`, POST `/analytics/aggregate` |
-| `media.py` | POST `/media/upload`, GET `/media/{id}`, DELETE `/media/{id}` |
+| `media.py` | POST `/media/upload`, GET `/media/{id}/url`, POST `/media/generate-social-image` |
+| `stock_images.py` | POST `/stock-images/generate`, GET `/stock-images/batches`, GET `/stock-images/status`, POST `/stock-images/notion/health` |
 
 OpenAPI docs auto-generated at `http://localhost:8000/api/v1/openapi.json`.
 
@@ -247,6 +253,18 @@ Platform constraints enforced:
 
 - **LangChain** (`adapters/langchain_adapter.py`): Tool-augmented agents with memory and state checkpointing. Wraps content generation, publishing, and analytics as LangChain tools.
 - **CrewAI** (`adapters/crewai_adapter.py`): 5 specialized agents (Strategist, Creator, Validator, Adversarial, Analyst) in a hierarchical crew process.
+
+### Social Image Generator (`services/ai/social_image_generator.py`)
+
+Generates DALL-E 3 images sized for the platform enum already used by `Content` (YouTube, Twitter, Facebook, Instagram, LinkedIn), distinct from the stock-photo pipeline (`image_generator.py`) which targets external stock marketplaces. Retries with exponential backoff, resizes to each platform's exact publish dimensions via centre-crop, and computes a disclosed heuristic confidence score (prompt clarity + prompt-rewrite stability + retry-based reliability — not a statistical model). `use_case="published"` raises `SocialImageGenerationError` below `confidence_threshold`; `use_case="draft"` returns with `requires_review=True` instead. Exposed via `POST /api/v1/media/generate-social-image`.
+
+### Governance Checks (`services/governance.py`)
+
+Four pure-function check categories run before generation: `check_legal` (PII regex scan on user text), `check_ethical` (AI-disclosure flag present), `check_security` (prompt-injection, XSS, SQL-injection-shaped, and path-traversal pattern matching), `check_resource` (rate limit + cost budget). Each returns pass/fail plus the specific failed check IDs — there is no confidence scoring or Bayesian weighting here, just deterministic pattern matching that's easy to audit and extend.
+
+### Media Integrity Verification (`services/media_manager.py`)
+
+`verify_upload_integrity()` re-downloads an S3 object after upload and re-hashes it against the `MediaAsset.sha256_hash` recorded before upload, catching silent transfer corruption. Called automatically after `generate-social-image` persists a new asset; returns `True` (no-op) when S3 isn't configured.
 
 ---
 
