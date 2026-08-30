@@ -382,17 +382,20 @@ Keyword rules:
         keywords = list(dict.fromkeys(raw_keywords))[:20]
         if theme:
             keywords = [theme.lower()] + keywords
-        # Pad with generic stock-photography keywords
+        # Pad with generic stock-photography keywords. A single pass is
+        # sufficient and, unlike a `while len(keywords) < 25` loop, cannot
+        # spin forever if every generic word already appears in `keywords`
+        # (e.g. the prompt itself contains "modern") — that previously
+        # caused an infinite loop since a repeated pass adds nothing new.
         generic = [
             "stock photo", "commercial use", "high resolution", "professional",
             "background", "concept", "modern", "creative", "design",
         ]
-        while len(keywords) < 25:
-            for g in generic:
-                if g not in keywords:
-                    keywords.append(g)
-                if len(keywords) >= 25:
-                    break
+        for g in generic:
+            if g not in keywords:
+                keywords.append(g)
+            if len(keywords) >= 25:
+                break
 
         return {
             "title":         title,

@@ -352,5 +352,8 @@ class SocialImageGenerator:
         return intersection / union if union else 0.5
 
 
-# Global instance, mirrors the pattern used by ai_service.py / media_manager.py
-social_image_generator = SocialImageGenerator()
+# Deliberately no module-level singleton here (unlike ai_service.py /
+# media_manager.py): constructing SocialImageGenerator() reads config.settings
+# in __init__, and a module-level instance would force that read at import
+# time — before test env-var overrides in other test modules get a chance to
+# apply. Construct it where it's used instead (see api/v1/media.py).

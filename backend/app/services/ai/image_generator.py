@@ -340,13 +340,25 @@ class ImageGenerator:
         """
         Return a synthetic 100x100 JPEG placeholder.
         Useful for running the full pipeline without API keys.
+
+        The prompt is baked into both the fill color and the drawn text so
+        each distinct prompt in a batch produces distinct image bytes —
+        otherwise every mock image is byte-identical and the pipeline's
+        SHA-256 deduplication step collapses an entire batch down to one
+        image regardless of the requested count.
         """
-        from PIL import Image, ImageDraw, ImageFont
+        from PIL import Image, ImageDraw
         import io as _io
 
-        img = Image.new("RGB", (100, 100), color=(70, 130, 180))
+        # Deterministic per-prompt color so identical prompts still produce
+        # identical (correctly deduplicated) images, but distinct prompts
+        # (e.g. the composition-varied prompts from _build_prompts) don't.
+        digest = hashlib.sha256(prompt.encode()).digest()
+        color = (digest[0], digest[1], digest[2])
+
+        img = Image.new("RGB", (100, 100), color=color)
         draw = ImageDraw.Draw(img)
-        draw.text((10, 40), "MOCK", fill=(255, 255, 255))
+        draw.text((5, 40), f"MOCK {digest.hex()[:8]}", fill=(255, 255, 255))
 
         buf = _io.BytesIO()
         img.save(buf, format="JPEG", quality=95)

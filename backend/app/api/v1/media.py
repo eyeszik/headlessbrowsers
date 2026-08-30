@@ -70,9 +70,11 @@ async def generate_social_image(
     """
     from backend.app.services.governance import run_all_checks, all_passed, collect_failures
     from backend.app.services.ai.social_image_generator import (
-        social_image_generator,
+        SocialImageGenerator,
         SocialImageGenerationError,
     )
+
+    generator = SocialImageGenerator()
 
     # 1. Governance checks run before spending an API call.
     governance_results = run_all_checks(
@@ -93,7 +95,7 @@ async def generate_social_image(
 
     # 2. Generate the image.
     try:
-        result = await social_image_generator.generate(
+        result = await generator.generate(
             prompt=request.prompt,
             platform=request.platform,
             confidence_threshold=request.confidence_threshold,
